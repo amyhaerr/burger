@@ -11,7 +11,7 @@ var orm = {
         });
     },
 
-    insertOne function (tableName, cols, vals, cb) {
+    insertOne: function (tableName, cols, vals, cb) {
         var queryString = `INSERT INTO ${tableName} (${cols}) VALUES ('${vals}');`;
         connection.query(queryString, function(err, result){
             if (err) {
@@ -26,7 +26,7 @@ var orm = {
                 if (err) {
                     throw err;
                 }
-                cd(result);
+                cb(result);
             });
         }
     }
