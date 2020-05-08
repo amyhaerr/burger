@@ -1,12 +1,12 @@
 var express = require("express");
-var connection = require("../config/connection");
+var connection = require("../config/connection.js");
 var router = express.Router();
-var burger = require("../models/burger");
+var burger = require("../models/burger.js");
 
 router.get("/", function (req, res) {
     burger.selectAll(function (data) {
-        dataToDisplay = data.slice(Math.max(data.length - 10, 1));
-        res.render("index", { burgers: dataToDisplay });
+        var burgerBurger = { burgers: data };
+        res.render("index", burgerBurger)
     });
 });
 
