@@ -1,12 +1,17 @@
 var express = require("express");
-var connection = require("../config/connection.js");
+// var connection = require("../config/connection.js");
 var router = express.Router();
 var burger = require("../models/burger.js");
 
-router.get("/", function (req, res) {
-    burger.selectAll(function (data) {
-        var burgerBurger = { burgers: data };
-        res.render("index", burgerBurger)
+router.get("/", function(req, res) {
+    res.redirect("/burgers");
+});
+
+router.get("/burgers", function (req, res) {
+   
+    burger.all(function (data) {//TODO...as we are passing in res, getting error that burger.all (is not a function)
+        
+        res.render("index", {burger: data});
     });
 });
 
