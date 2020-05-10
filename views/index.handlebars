@@ -1,7 +1,7 @@
 <div class="container">
   
   <div class="jumbotron text-center bg-success text-white">
-    <h1 class="display-4" id="app-title">Eat Da Burger <img src="../public/assets/img/burger.jpg"></h1>
+    <h1 class="display-4" id="app-title">Eat Da Burger <img src="/assets/img/burger.jpg"></h1>
     <p class="lead">Welcome to Eat Da Burger. Home to the burger of your dreams!</p>
   </div>
 
@@ -36,7 +36,7 @@
         <div class="card-body">
               {{#each burgers}}
                 {{#unless devoured}}
-                  {{> burgers/burger-block devour=false}}
+                  {{!-- {{> burgers/burger-block devour=false}} --}}
                 {{/unless}}
               {{/each}}
         </div>
@@ -44,8 +44,8 @@
     </div>
 
     <div class="col-md-6 mt-4">
-      <div class="card devoured-card">
-        <div class="card-header text-white" id="devoured-card-header">
+      <div class="card devoured-card border border-success" >
+        <div class="card-header bg-success text-white" id="devoured-card-header">
          Devoured burgers
         </div>
         
