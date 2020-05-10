@@ -20,9 +20,9 @@ var orm = {
             cb(result);
         });
     },
-        updateOne: function (tableName, colVal, boolean, colName, condition, cb) {
-            var queryString = `UPDATE ${tableName} SET ${colVal}=${boolean} WHERE ${colName}=${condition}`;
-            connection.query(queryString, function(err, result){
+        updateOne: function (id, cb) {
+            var queryString = `UPDATE burgers SET devoured='1' WHERE ${id}`;
+            connection.query(queryString, [id], function(err, result){
                 if (err) {
                     throw err;
                 }

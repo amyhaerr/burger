@@ -1,32 +1,27 @@
 var express = require("express");
-// var connection = require("../config/connection.js");
 var router = express.Router();
 var burger = require("../models/burger.js");
 
-router.get("/", function(req, res) {
-    res.redirect("/burgers");
-});
-
-router.get("/burgers", function (req, res) {
-   
-    burger.all(function (data) {//TODO...as we are passing in res, getting error that burger.all (is not a function)
-        
-        res.render("index", {burger: data});
+router.get("/", function (req, res) {
+    burger.all(function (data) {
+        var burgerBurger = { burgers: data };
+        res.render("index", burgerBurger);
     });
+
 });
 
-router.post("/insertBurger", function (req, res) {
+router.post("/insertOne", function (req, res) {
     burger.insertOne(req.body.burger_name, function (addon) {
         res.redirect("/")
     });
 });
 
-router.post("/update/:id", function (req, res) {
-    var condition = `id = ${req.params.id}`;
-    burger.updateOne({ devoured: req.body.devoured },
-        condition, function () {
-            res.redirect("/");
-        })
+router.post("/updateOne", function (req, res) {
+    // var condition = `id = ${req.params.id}`;
+    var id = req.body.id;
+    burger.updateOne(id, function (){
+        res.redirect("/");
+    });
 });
 
 module.exports = router;

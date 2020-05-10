@@ -1,5 +1,5 @@
 <div class="container">
-  
+
   <div class="jumbotron text-center bg-success text-white">
     <h1 class="display-4" id="app-title">Eat Da Burger <img src="/assets/img/burger.jpg"></h1>
     <p class="lead">Welcome to Eat Da Burger. Home to the burger of your dreams!</p>
@@ -9,14 +9,14 @@
     <div class="col-md-12">
       <div class="card border border-success">
         <div class="card-header bg-success text-white">
-         Can I take your order?
+          May I take your order, please?
         </div>
-       
+
         <div class="card-body">
-          <form class="create-form">
+          <form class="create-update-form" action="/insertOne" method="POST">
             <div class="form-group">
               <label for="burger">Place your order here:</label>
-              <input type="text" class="form-control" id="burgerToGo" placeholder="">
+              <input type="text" class="form-control"name="burger_name" id="toGoBurger" placeholder="Place order here">
             </div>
             <button class="btn btn-success" type="submit">Place order</button>
           </form>
@@ -30,30 +30,39 @@
     <div class="col-md-6 mt-4">
       <div class="card border border-success">
         <div class="card-header bg-success text-white">
-         Burgers
+          Burgers
         </div>
-        
+
         <div class="card-body">
-              {{#each burgers}}
-                {{#unless devoured}}
-                  {{!-- {{> burgers/burger-block devour=false}} --}}
-                {{/unless}}
-              {{/each}}
+          {{#each burgers}}
+          {{#unless this.devoured}}
+          <p>{{this.burger_name}}</p>
+          <form action="/updateOne" method="POST">
+          <input type="hidden" name="id" value= "{{this.id}}">
+          <input type="hidden" name="devoured" value="1">
+          <button class="btn btn-success" type="submit">Eat Da Burger!</button>
+          </form>
+          {{/unless}}
+          {{/each}}
         </div>
       </div>
     </div>
 
     <div class="col-md-6 mt-4">
-      <div class="card devoured-card border border-success" >
+      <div class="card devoured-card border border-success">
         <div class="card-header bg-success text-white" id="devoured-card-header">
-         Devoured burgers
+          Devoured burgers
         </div>
-        
+
         <div class="card-body">
           {{#each burgers}}
-              {{#if devoured}}
-                {{> burgers/burger-devoured devour=true}}
-              {{/if}}
+          {{#if this.devoured}}
+          <div class="devourBurger">
+            <p>
+              {{this.burger_name}}
+            </p>
+          </div>
+          {{/if}}
           {{/each}}
         </div>
       </div>
