@@ -20,8 +20,8 @@ var orm = {
             cb(result);
         });
     },
-        updateOne: function (id, cb) {
-            var queryString = `UPDATE burgers SET devoured='1' WHERE ${id}`;
+        updateOne: function (colVal, id, cb) {
+            var queryString = `UPDATE burgers SET devoured='1' WHERE ${colVal}=${id}`;
             connection.query(queryString, [id], function(err, result){
                 if (err) {
                     throw err;
